@@ -1,30 +1,22 @@
-const connection = require('./connection');
+const connection = require('../connection/connection');
 
 const getAllProducts = async () => {
   const [products] = await connection.execute('SELECT * FROM products');
-  // console.log(products);
   return products;
 };
 
 const getProductById = async (id) => {
-  const [[products]] = await connection.execute(
+  const [products] = await connection.execute(
     'SELECT * FROM products WHERE id = ?',
     [id],
   );
-  console.log(products);
-  return products;
+  return products[0];
 };
 
-const insert = async (product) => {
-  const columns = Object.keys(product).join(', ');
-
-  const placeholders = Object.keys(product)
-    .map((_key) => '?')
-    .join(', ');
-
+const addProduct = async (productName) => {
   const [{ insertId }] = await connection.execute(
-    `INSERT INTO products (${columns}) VALUE (${placeholders})`,
-    [...Object.values(product)],
+    'INSERT INTO products (name) VALUE (?)',
+    [productName],
   );
 
   return insertId;
@@ -33,5 +25,5 @@ const insert = async (product) => {
 module.exports = {
   getAllProducts,
   getProductById,
-  insert,
+  addProduct,
 };

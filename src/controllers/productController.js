@@ -13,18 +13,20 @@ const getProductById = async (req, res) => {
   res.status(200).json(message);
 };
 
-const createProduct = async (req, res) => {
+const addProduct = async (req, res) => {
   const { name } = req.body;
-
-  const { type, message } = await productService.createNewProduct(name);
-
-  if (type === 'NAME_REQUIRED') return res.status(400).json(message);
-  if (type === 'INVALID_LENGTH') return res.status(422).json(message);
-  res.status(201).json(message);
+  if (!name) {
+    return res.status(400).json({ message: '"name" is required' });
+  }
+  if (name.length < 5) {
+    return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
+  }
+  const insertId = await productService.addProduct(name);
+  return res.status(201).json({ name, id: insertId });
 };
 
 module.exports = {
   getAllProducts,
   getProductById,
-  createProduct,
+  addProduct,
 };

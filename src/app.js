@@ -1,17 +1,15 @@
 const express = require('express');
-const productController = require('./controllers/productController');
+const productsRouter = require('./routes/products.router');
 
 const app = express();
 
-// não remova esse endpoint, é para o avaliador funcionar 
+app.use(express.json());
+
 app.get('/', (_request, response) => {
   response.send();
 });
 
-app.get('/products', productController.getAllProducts);
+/* Adicionamos o registro das rotas para o CRUD de pessoas passageiras */
+app.use('/products', productsRouter);
 
-app.get('/products/:id', productController.getProductById);
-// não remova essa exportação, é para o avaliador funcionar
-// você pode registrar suas rotas normalmente, como o exemplo acima
-// você deve usar o arquivo index.js para executar sua aplicação 
 module.exports = app;
