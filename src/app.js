@@ -1,5 +1,6 @@
 const express = require('express');
 const productsRouter = require('./routes/products.router');
+const salesRouter = require('./routes/sales.router');
 
 const app = express();
 
@@ -11,5 +12,6 @@ app.get('/', (_request, response) => {
 
 /* Adicionamos o registro das rotas para o CRUD de pessoas passageiras */
 app.use('/products', productsRouter);
+app.use('/sales', salesRouter);
 
 module.exports = app;
