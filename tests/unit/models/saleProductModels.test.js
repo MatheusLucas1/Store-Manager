@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const salesModel = require('../../../src/models/salesModel');
+const salesProductModel = require('../../../src/models/sales_productModel');
 
 const connection = require('../../../src/connection/connection');
 
@@ -10,11 +10,12 @@ describe('Testes de unidade da camada model da rota /sales', function () {
   afterEach(() => {
     sinon.restore();
   });
+
   it('Recuperando a lista de sales', async function () {
     // Arrange
-    sinon.stub(connection, 'execute').resolves([ getAll ]);
+    sinon.stub(connection, 'execute').resolves([getAll]);
     // Act
-    const result = await salesModel.getAllSales();
+    const result = await salesProductModel.getAll();
     // Assert
     expect(connection.execute).to.be.calledOnce;
     expect(connection.execute).to.be.calledWith('SELECT id as saleId, date FROM sales;');
@@ -25,7 +26,7 @@ describe('Testes de unidade da camada model da rota /sales', function () {
     // Arrange
     sinon.stub(connection, 'execute').resolves([[getAll[0]]]);
     // Act
-    const result = await salesModel.getSaleById(1);
+    const result = await salesProductModel.getSaleProductById(1);
     // Assert
     expect(connection.execute).to.be.calledOnce;
     expect(connection.execute).to.be.calledWith('SELECT id as saleId, date FROM sales WHERE id = ?;');
@@ -35,6 +36,6 @@ describe('Testes de unidade da camada model da rota /sales', function () {
   it(' insere um produto com sucesso', async () => {
     sinon.stub(connection, 'execute').resolves([{ insertId: 3 }]);
 
-    await salesModel.addSale(insertSaleTemplate);
+    await salesProductModel.insertSaleProduct(insertSaleTemplate);
   });
 });
