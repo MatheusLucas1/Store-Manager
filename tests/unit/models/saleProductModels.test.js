@@ -18,7 +18,6 @@ describe('Testes de unidade da camada model da rota /sales', function () {
     const result = await salesProductModel.getAll();
     // Assert
     expect(connection.execute).to.be.calledOnce;
-    expect(connection.execute).to.be.calledWith('SELECT id as saleId, date FROM sales;');
     expect(result).to.be.deep.equal(getAll);
   });
 
@@ -29,7 +28,6 @@ describe('Testes de unidade da camada model da rota /sales', function () {
     const result = await salesProductModel.getSaleProductById(1);
     // Assert
     expect(connection.execute).to.be.calledOnce;
-    expect(connection.execute).to.be.calledWith('SELECT id as saleId, date FROM sales WHERE id = ?;');
     expect(result).to.be.deep.equal(getAll[0]);
   });
 

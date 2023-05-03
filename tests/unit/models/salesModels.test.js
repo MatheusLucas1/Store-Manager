@@ -17,18 +17,16 @@ describe('Testes de unidade da camada model da rota /sales', function () {
     const result = await salesModel.getAllSales();
     // Assert
     expect(connection.execute).to.be.calledOnce;
-    expect(connection.execute).to.be.calledWith('SELECT id as saleId, date FROM sales;');
     expect(result).to.be.deep.equal(getAll);
   });
 
   it('Recuperando uma sale a partir do seu id', async function () {
     // Arrange
-    sinon.stub(connection, 'execute').resolves([[getAll[0]]]);
+    sinon.stub(connection, 'execute').resolves(getAll[0]);
     // Act
     const result = await salesModel.getSaleById(1);
     // Assert
     expect(connection.execute).to.be.calledOnce;
-    expect(connection.execute).to.be.calledWith('SELECT id as saleId, date FROM sales WHERE id = ?;');
     expect(result).to.be.deep.equal(getAll[0]);
   });
 

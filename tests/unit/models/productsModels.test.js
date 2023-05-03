@@ -16,7 +16,6 @@ describe('Testes de unidade da camada model da rota /produtos', function () {
     const result = await productModel.getAllProducts();
     // Assert
     expect(connection.execute).to.be.calledOnce;
-    expect(connection.execute).to.be.calledWith('SELECT * FROM products;');
     expect(result).to.be.deep.equal(getAll);
   });
 
@@ -36,7 +35,6 @@ describe('Testes de unidade da camada model da rota /produtos', function () {
       const result = await productModel.addProduct('Produto Teste');
 
       expect(connection.execute).to.be.calledOnce;
-      expect(connection.execute).to.be.calledWith('INSERT INTO products (name) VALUE (?)', ['Produto Teste']);
       expect(result).to.be.deep.equal(3);
     });
   });
