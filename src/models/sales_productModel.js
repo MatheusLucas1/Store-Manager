@@ -2,7 +2,7 @@ const connection = require('../connection/connection');
 
 const getAll = async () => {
   const [sales] = await connection.execute(
-    'SELECT sale_id as saleId, product_id as productId, quantity FROM sales_products;',
+    'SELECT * FROM sales_products INNER JOIN sales ON sales_products.sale_id = sales.id;',
   );
   return sales;
 };

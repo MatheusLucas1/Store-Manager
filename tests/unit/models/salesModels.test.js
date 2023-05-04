@@ -22,9 +22,9 @@ describe('Testes de unidade da camada model da rota /sales', function () {
 
   it('Recuperando uma sale a partir do seu id', async function () {
     // Arrange
-    sinon.stub(connection, 'execute').resolves(getAll[0]);
+    sinon.stub(connection, 'execute').resolves([[getAll[0]]]);
     // Act
-    const result = await salesModel.getSaleById(1);
+    const [result] = await salesModel.getSaleById(1);
     // Assert
     expect(connection.execute).to.be.calledOnce;
     expect(result).to.be.deep.equal(getAll[0]);

@@ -25,7 +25,7 @@ describe('Testes de unidade da camada model da rota /sales', function () {
     // Arrange
     sinon.stub(connection, 'execute').resolves([[getAll[0]]]);
     // Act
-    const result = await salesProductModel.getSaleProductById(1);
+    const [result] = await salesProductModel.getSaleProductById(1);
     // Assert
     expect(connection.execute).to.be.calledOnce;
     expect(result).to.be.deep.equal(getAll[0]);

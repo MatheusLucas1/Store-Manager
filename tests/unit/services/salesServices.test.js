@@ -20,7 +20,7 @@ describe('Testando a camada services da rota /sales', () => {
 
     const result = await saleService.getAllSales();
 
-    expect(result).to.be.deep.equal(getAll);
+    expect(result).to.be.deep.equal(getSales.sales);
   });
 
   it('retorna uma sale pelo id', async () => {
@@ -29,10 +29,9 @@ describe('Testando a camada services da rota /sales', () => {
 
     const result = await saleService.getSaleById(1);
 
-    const r = { ...getAll[0] };
-    delete r.saleId;
+    // const r = { ...getAll[0] };
 
-    expect(result).to.be.deep.equal([r]);
+    expect(result).to.be.deep.equal(getSales.sales[0]);
   });
 
   it('retorna um erro quando a sale não é encontrada', async () => {
@@ -44,7 +43,7 @@ describe('Testando a camada services da rota /sales', () => {
   });
 
   it('salva uma sale com sucesso!', async () => {
-    sinon.stub(saleModel, 'addSalle').resolves(3);
+
     sinon.stub(saleProductModel, 'insertSaleProduct').resolves();
 
     await saleService.insertSale(insertSaleTemplate);

@@ -30,7 +30,7 @@ describe('Testando a camada services da rota /products', () => {
 
     expect(productModel.getProductById).to.be.calledOnce;
     expect(productModel.getProductById).to.be.calledWith(1);
-    expect(result).to.be.deep.equal(getAll[0]);
+    expect(result.message).to.be.deep.equal(getAll[0]);
   });
 
   it('retorna um erro quando o produto não é encontrado', async () => {
@@ -40,7 +40,7 @@ describe('Testando a camada services da rota /products', () => {
 
     expect(productModel.getProductById).to.be.calledOnce;
     expect(productModel.getProductById).to.be.calledWith(999);
-    expect(result).to.be.equal(undefined);
+    expect(result.message).to.be.equal('Product not found');
   });
 
   it(' insere um produto com sucesso', async () => {

@@ -1,23 +1,13 @@
 const { salesModel, saleProductModel } = require('../models');
 
 const getAllSales = async () => {
-  let allSales = await salesModel.getAllSales();
-  allSales = allSales.map((sale) => ({
-    saleId: sale.sale_id,
-    date: sale.date,
-    quantity: sale.quantity,
-    productId: sale.product_id,
-  }));
+  const allSales = await salesModel.getAllSales();
   return allSales;
 };
 
 const getSaleById = async (id) => {
-  let sale = await salesModel.getSaleById(id);
-  sale = sale.map((sa) => ({
-    date: sa.date,
-    quantity: sa.quantity,
-    productId: sa.product_id,
-  }));
+  const sale = await salesModel.getSaleById(id);
+
   return sale;
 };
 
