@@ -15,10 +15,8 @@ const getSaleById = async (id) => {
       FROM sales_products INNER JOIN sales ON sales_products.sale_id = sales.id WHERE sale_id = ?;`,
     [id],
   );
-  console.log(sale);
   return sale;
 };
-getSaleById(1);
 
 const addSale = async (date) => {
   const [{ insertId }] = await connection.execute(
