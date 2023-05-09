@@ -3,11 +3,12 @@ const { salesController } = require('../controllers');
 const {
   validateSaleFields,
   validateSaleQuantity,
-  validateSalesProducts } = require('../middlewares/salesValidation');
+  validateSalesProducts,
+  validateSaleId } = require('../middlewares/salesValidation');
 
 const router = express.Router();
 
-router.get('/:id', salesController.getSaleById);
+router.get('/:id', validateSaleId, salesController.getSaleById);
 router.get('/', salesController.getAllSales);
 
 router.post(
